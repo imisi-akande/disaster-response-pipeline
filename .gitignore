@@ -1,0 +1,8 @@
+# virtualenv
+disasterresponse-env/
+
+# Finder stuff
+.DS_Store
+
+# checkpoints
+.ipynb_checkpoints
