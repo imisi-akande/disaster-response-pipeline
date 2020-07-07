@@ -118,10 +118,16 @@ def build_model():
             ('starting_verb', StartingVerbExtractor())
         ])),
 
-        ('clf', MultiOutputClassifier(AdaBoostClassifier()))
+        ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
     ])
 
-    return model
+    parameters = {
+        'features__text_pipeline__tfidf__use_idf': (True, False),
+        'classifier__estimator__n_estimators': [50, 100, 200]
+        }
+    cv = GridSearchCV(model, param_grid=parameters)
+
+    return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
     """
